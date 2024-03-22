@@ -25,24 +25,24 @@ export default function Dashboard({auth, posts, spotify}) {
 
         if (!spotifyToken) {
             // Redirect to your Laravel route for authorization
-            window.location.href = '/authorize-spotify';
+            window.location.href = '/authorize-spotify'; // asks user for authorization
         } else {
             setAccessToken(spotifyToken);
         }
         //API ACCESS TOKEN
-        var authParameters = {
+        var authParameters = {      //spotify format, sending client id and secret
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             body: 'grant_type=client_credentials&client_id=' + CLIENT_ID + '&client_secret=' + CLIENT_SECRET
         };
-        fetch('https://accounts.spotify.com/api/token', authParameters)
+        fetch('https://accounts.spotify.com/api/token', authParameters) //fetches the token for use
             .then(result => result.json())
             .then(data => setAccessToken(data.access_token))
     }, []);
 
-        const fetchData = async () => {
+        const fetchData = async () => {     //fetching song from api
             try {
                 var searchParameters = {
                     method: 'GET',
@@ -85,7 +85,7 @@ export default function Dashboard({auth, posts, spotify}) {
         e.preventDefault();
 
             // Assuming `selectedPost` has all the data you need to submit
-        router.post('/posts', selectedPost);
+        router.post('/posts', selectedPost); // sends post to backend
     };
 
     return (
