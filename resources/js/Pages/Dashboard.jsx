@@ -118,44 +118,46 @@ export default function Dashboard({auth, posts, spotify}) {
             </div>
             {selectedPost && (
                 <div className="container mx-auto px-4 mb-8">
-                    <div className="max-w-xl mx-auto bg-white rounded-lg overflow-hidden shadow-lg flex p-4 mb-4">
-                        <div className="w-2/3 p-2">
+                    <div className="max-w-xl mx-auto bg-white rounded-lg overflow-hidden shadow-lg relative mb-4 grid grid-cols-12">
+                        <div className="col-span-8 p-4 flex flex-col justify-between">
                             <form onSubmit={submitPost}>
-                            <div className="text-xl font-bold">{selectedPost.title}</div>
-                            <div className="text-md mb-2 text-gray-500"> by <span className="font-bold"> {selectedPost.artist}</span></div>
-                            <textarea
-                                className="text-sm border-2 border-gray-300 w-full p-2 mb-2 rounded-lg"
-                                placeholder="Type your description here"
-                                value={selectedPost.description}
-                                onChange={event => setSelectedPost({ ...selectedPost, description: event.target.value })}
-                                style={{ resize: 'none' }}
-                            />
-                            <button
-                                type="submit"
-                                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                            >
-                                Submit
-                            </button>
+                                <div className="text-xl font-bold">{selectedPost.title}</div>
+                                <div className="text-md mb-2 text-gray-500"> by <span className="font-bold">{selectedPost.artist}</span></div>
+                                <textarea
+                                    className="text-sm border-2 border-gray-300 w-full p-2 mb-2 rounded-lg"
+                                    placeholder="Type your description here"
+                                    value={selectedPost.description}
+                                    onChange={event => setSelectedPost({ ...selectedPost, description: event.target.value })}
+                                    style={{ resize: 'none', height: '80px' }}
+                                />
+                                <button
+                                    type="submit"
+                                    className="bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold py-1 px-2 rounded"
+                                >
+                                    Submit
+                                </button>
                             </form>
                         </div>
-                        <img className="w-1/3 rounded-lg" src={selectedPost.album_cover} alt={selectedPost.title} />
+                        <div className="col-span-4">
+                            <img className="w-full h-full object-cover" src={selectedPost.album_cover} alt={selectedPost.title} />
+                        </div>
                     </div>
                 </div>
             )}
             {/* Only render this section if there are tracks to display */}
             {tracks.length > 0 && (
-                <div className="container mx-auto px-4 mb-8">
+                <div className="container mx-auto px-4 mb-8 p-4">
                 <div className="grid grid-cols-4 gap-4 mx-2 overflow-y-auto h-32 md:h-64 sm:h-48">
                     {tracks && tracks.map((track, i) => {
                         return (
                             <div
-                                className="max-w-xs h-64 overflow-hidden shadow-lg cursor-pointer"
+                                className="bg-white rounded-lg max-w-xs h-56 overflow-hidden shadow-lg cursor-pointer"
                                 key={i}
                                 onClick={() => handleSongClick(track)}
                             >
                                 <img className="w-full" src={track.album.images[0].url} alt={track.name} />
-                                <div className="px-6 py-4">
-                                    <div className="font-bold text-white text-l mb-2 line-clamp-3">{track.name}</div>
+                                <div className="px-4 py-2">
+                                    <div className="font-bold text-black text-l mb-2 line-clamp-2">{track.name}</div>
                                 </div>
                             </div>
                         );
