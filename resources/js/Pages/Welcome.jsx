@@ -1,5 +1,7 @@
 import { Link, Head } from '@inertiajs/react';
 import logo from '@/assets/tmusiclogo.svg';
+import spotifylogo from '@/assets/spotifylogo.svg';
+
 
 export default function Welcome({ auth }) {
     return (
@@ -12,7 +14,7 @@ export default function Welcome({ auth }) {
                 </div>
 
                 {/* Text and buttons container */}
-                <div className="flex flex-col items-center md:flex-1">
+                <div className="flex flex-col items-center md:flex-1  text-center md:text-left">
                     <h1 className="text-5xl font-bold mb-6 text-white">Happening now</h1>
                     <p className="text-lg mb-6 text-white">Join today.</p>
                     {auth.user ? (
@@ -38,7 +40,12 @@ export default function Welcome({ auth }) {
                             </Link>
                         </div>
                     )}
-                    {/* Optional: Additional text or components */}
+                    {/* Optional: Additional text or Components */}
+                </div>
+                {/* Spotify Logo at bottom left */}
+                <div className="absolute bottom-0 right-0 p-10">
+                    <p className="text-white text-sm mb-2">Powered by</p>
+                    <img src={spotifylogo} alt="Spotify Logo" className="w-40" />
                 </div>
             </div>
         </>

@@ -3,20 +3,6 @@ import likebtn from '@/assets/likebutton.svg';
 import commentbtn from '@/assets/commentbutton.svg';
 import playbtn from '@/assets/playbutton.svg';
 
-// Define your button icons as SVGs or import them from a library
-// const LikeIcon = () => (
-//     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-thumbs-up">
-//         <path d="M14 9V5a2 2 0 0 0-2-2H6v12l2 2h2v-2h2v2l2.5-2.5M16.5 9.5h1M19 9h2"/>
-//     </svg>
-// );
-
-// const CommentIcon = () => (
-//     // ... SVG for comment icon
-// );
-//
-// const PlayIcon = () => (
-//     // ... SVG for play icon
-// );
 
 export const PostItem = ({ post }) => {
     // Define handler functions for each button

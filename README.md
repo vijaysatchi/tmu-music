@@ -1,3 +1,5 @@
+# tmu-music
+
 # Steps to run the project
 
 Open terminal and run:
