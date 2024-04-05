@@ -10,6 +10,7 @@ import PostList from "@/Pages/Post/PostList.jsx";
 export default function Dashboard({ auth, posts, spotify }) {
     const [searchInput, setSearchInput] = useState("");
     const [accessToken, setAccessToken] = useState("");
+    const [topTracks, setTopTracks] = useState([]);
     const [tracks, setTracks] = useState([]);
     const [selectedPost, setSelectedPost] = useState(null);
     const [spotifyUserProfile, setSpotifyUserProfile] = useState(null); // Add this line
@@ -77,6 +78,37 @@ export default function Dashboard({ auth, posts, spotify }) {
             console.error("Error fetching data:", error);
         }
     };
+
+    /* CURRENTLY UNUSED
+    * type (String):
+    *   - artists
+    *   - tracks
+    * 
+    * time_range (String):
+    *   - short_term  (approximately last 4 weeks)
+    *   - medium_term (approximately last 6 months)
+    *   - long_term   (calculated from ~1 year of data and including all new data as it becomes available)
+    */
+    const fetchFavorites = async (type = "tracks", time_range="short_term", limit = 5, offset = 0) => {
+        try {
+            const response = await fetch(`https://api.spotify.com/v1/me/top/${type}?time_range=${time_range}&limit=${limit}&offset=${offset}`, {
+                headers: {
+                    "Authorization": `Bearer ${accessToken}`,
+                    "Content-Type": "application/json",
+                },
+            });
+            if (!response.ok) throw new Error("Failed to fetch Spotify User's Top Items");
+            const data = await response.json();
+            setTopTracks(data.items)
+        } catch (error) {
+            console.error("Error fetching Spotify User's Top Items: ", error);
+        }
+    }
+
+    useEffect(() => {
+        // Fetch top tracks when the component mounts
+        fetchFavorites();
+    }, [topTracks]);
 
 
     useEffect(() => {
